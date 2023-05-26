@@ -12,8 +12,6 @@ export default function Table1() {
     fetchTable1();
   },[]);
 
-  
-
   const fetchTable1 = () => {
     setIsLoading(true);
 

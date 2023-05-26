@@ -77,7 +77,8 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 export default function Range1() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [count,setCount] = useState(0);
+  
   useEffect(() => {
     fetchRange1(1, 100);
   }, []);
@@ -89,6 +90,9 @@ export default function Range1() {
       .then((response) => {
         const responseData = response.data;
         setData(responseData);
+        // console.log(responseData.length);
+        const a = responseData.length;
+        setCount(a);
       })
       .finally(() => {
         setIsLoading(false); // Set loading state to false after the request is completed
@@ -114,14 +118,16 @@ export default function Range1() {
   };
 
   return (
+    
     <div>
+      <br/>
       <center>
-        <h1>Constituency won with margin Range 1-100</h1>
+        <h1>Constituency won with margin Range 1-100 ({count} {count > 1 ? ('candidates'):('candidate')})</h1>
         {isLoading ? ( // Render loading button if isLoading is true
           // <button disabled>Loading...</button>
           <FontAwesomeIcon icon={faSpinner} spin size="3x" /> // Display loader icon while loading
         ) : (
-          <center>
+        <center>
           <table style={range1Style}>
             <thead>
               <tr>

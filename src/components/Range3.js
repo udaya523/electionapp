@@ -7,15 +7,20 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 export default function Range3() {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [count,setCount] = useState(0);
+  
 
   useEffect(() => {
     fetchrange3(1000,10000);
   },[]);
 
   const fetchrange3 = (start,end) => {
-    axios.get(`http://localhost:8080/election/constrange/${start}/${end}`).then((respon) => {
-      const response = respon.data;
-      setData(response);
+    axios.get(`http://localhost:8080/election/constrange/${start}/${end}`).then((response) => {
+      const responseData = response.data;
+      setData(responseData);
+      const a = responseData.length;
+        setCount(a);
+       
     } )
     .finally(() => {
       setIsLoading(false); // Set loading state to false after the request is completed
@@ -35,14 +40,15 @@ export default function Range3() {
 
   const range3CellStyle = {
     border: '1px solid black',
-    padding: '8px',
+    padding: '5px',
     textAlign: 'center',
   };
 
   return (
     <div>
       <center>
-        <h1>Constituency won with margin Range 1000-10000</h1>
+        <br/>
+        <h1>Constituency won with margin Range 1000-10000 ({count} {count > 1 ? ('candidates'):('candidate')})</h1>
         {isLoading ? ( // Render loading button if isLoading is true
           // <button disabled>Loading...</button>
           <FontAwesomeIcon icon={faSpinner} spin size="3x" /> // Display loader icon while loading

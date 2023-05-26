@@ -8,6 +8,8 @@ export default function Range6() {
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [count,setCount] = useState(0);
+  
 
   useEffect(() => {
     fetchrange6(100000);
@@ -15,9 +17,13 @@ export default function Range6() {
 
 
   const fetchrange6 = (start,end) => {
-    axios.get(`http://localhost:8080/election/constrange/${start}`).then((respon) => {
-      const response = respon.data;
-      setData(response);
+    axios.get(`http://localhost:8080/election/constrange/${start}`).then((response) => {
+      const responseData = response.data;
+      setData(responseData);
+      const a = responseData.length;
+      setCount(a);
+     
+
     } )
     .finally(() => {
       setIsLoading(false); // Set loading state to false after the request is completed
@@ -37,7 +43,7 @@ export default function Range6() {
 
   const range6CellStyle = {
     border: '1px solid black',
-    padding: '8px',
+    padding: '5px',
     textAlign: 'center',
   };
 
@@ -45,7 +51,8 @@ export default function Range6() {
     
     <div>
       <center>
-        <h1>Constituency won with margin Range 100000 And Above</h1>
+        <br/>
+        <h1>Constituency won with margin Range 100000 And Above ({count} {count > 1 ? ('candidates'):('candidate')} )</h1>
         {isLoading ? ( // Render loading button if isLoading is true
           // <button disabled>Loading...</button>
           <FontAwesomeIcon icon={faSpinner} spin size="3x" /> // Display loader icon while loading

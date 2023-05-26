@@ -21,7 +21,7 @@ const colors = [
   ];
 
 
-const DrillDownPieChart1 = () => {
+const DrillDownPieChart1 = (props) => {
   // const edata = electiondata;
   // const [ranges2, setRanges2] = useState([]);
   // const [ranges3, setRanges3] = useState([]);
@@ -58,9 +58,9 @@ const DrillDownPieChart1 = () => {
           const rangeLabel = i.cname;
           const valuee = i.totvotes;
           ranges3.push({
-            name: rangeName +" "+ rangeLabel,
+            name: rangeName,
             value: valuee,
-            // label: rangeLabel
+            label: rangeLabel
           });
         }
         setPreviousData(data);
@@ -123,6 +123,7 @@ const DrillDownPieChart1 = () => {
         // setPreviousData(data); // Store the previous data before updating
         // setData(subRangeData);
       }
+      props.handleslice();
     }
 
     else if (level === 2){
@@ -140,6 +141,7 @@ const DrillDownPieChart1 = () => {
       setPreviousData([]);
       setLevel(1);
       console.log(level);
+      props.handleback();
     }
     if (level === 3){
       setData(previousData);
@@ -177,7 +179,7 @@ const DrillDownPieChart1 = () => {
             dataKey="value"
             nameKey="name"
             cx="50%"
-            cy="50%"
+            cy="45%"
             outerRadius={180}
             onClick={(data) => HandleSliceClick(data.name)}
             >
