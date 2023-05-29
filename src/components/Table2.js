@@ -46,7 +46,7 @@ export default function Table2() {
 
     return (
       <>
-      <br/>
+      
       <Link to="/reports">
           <button className="btn btn-secondary mx-2">
               Back

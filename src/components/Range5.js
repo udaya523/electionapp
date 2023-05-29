@@ -34,6 +34,7 @@ export default function Range5() {
   const range5Style = {
     borderCollapse: 'collapse',
     width: '100%',
+    
   };
 
   const range5HeaderStyle = {

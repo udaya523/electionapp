@@ -33,6 +33,7 @@ export default function Range4() {
   const range4Style = {
     borderCollapse: 'collapse',
     width: '100%',
+    margin:10,
   };
 
   const range4HeaderStyle = {
